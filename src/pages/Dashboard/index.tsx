@@ -9,7 +9,6 @@ import api from '../../services/api';
 import Header from '../../components/Header';
 
 import formatValue from '../../utils/formatValue';
-import formatDateBR from '../../utils/formatDate';
 
 import { Container, CardContainer, Card, TableContainer } from './styles';
 
@@ -41,16 +40,18 @@ const Dashboard: React.FC = () => {
         response.data.transactions.map((transaction: Transaction) => {
           return {
             ...transaction,
-            formattedValue: formatValue(Number(transaction.value)),
-            formattedDate: formatDateBR(transaction.created_at),
+            formattedValue: formatValue(transaction.value),
+            formattedDate: new Date(transaction.created_at).toLocaleDateString(
+              'pt-BR',
+            ),
           };
         }),
       );
 
       setBalance({
-        income: formatValue(Number(response.data.balance.income)),
-        outcome: formatValue(Number(response.data.balance.outcome)),
-        total: formatValue(Number(response.data.balance.total)),
+        income: formatValue(response.data.balance.income),
+        outcome: formatValue(response.data.balance.outcome),
+        total: formatValue(response.data.balance.total),
       });
     }
 
@@ -101,6 +102,7 @@ const Dashboard: React.FC = () => {
                 <tr key={transaction.id}>
                   <td className="title">{transaction.title}</td>
                   <td className={transaction.type}>
+                    {transaction.type === 'outcome' && '- '}
                     {transaction.formattedValue}
                   </td>
                   <td>{transaction.category.title}</td>
