@@ -16,7 +16,7 @@
   <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361">
 </p>
 
-<img alt="GoFinance" src="./src/assets/home.png" />
+<img alt="GoFinance" src="./src/assets/capa.png" />
 
 ## :rocket: Sobre a GoFinances
 
